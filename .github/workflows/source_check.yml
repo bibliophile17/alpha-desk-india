@@ -1,0 +1,19 @@
+name: source-check
+on:
+  workflow_dispatch:
+
+jobs:
+  price-probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e .
+      - run: python -m alphadesk.probe_prices
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: price-probe-results
+          path: logs/price_probe/

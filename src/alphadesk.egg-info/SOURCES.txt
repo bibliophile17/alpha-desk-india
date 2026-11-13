@@ -1,0 +1,11 @@
+README.md
+pyproject.toml
+src/alphadesk/__init__.py
+src/alphadesk/prices.py
+src/alphadesk/probe_prices.py
+src/alphadesk/validate.py
+src/alphadesk.egg-info/PKG-INFO
+src/alphadesk.egg-info/SOURCES.txt
+src/alphadesk.egg-info/dependency_links.txt
+src/alphadesk.egg-info/requires.txt
+src/alphadesk.egg-info/top_level.txt
