@@ -1,6 +1,10 @@
 
-"""Validation checks. Each returns a list of flag dicts. Nothing is removed,
-filled or corrected: flags are prompts for manual review."""
+"""Validation checks.
+
+Each check returns a list of flag dictionaries.
+Nothing is removed, filled or corrected.
+Flags are prompts for manual review.
+"""
 from __future__ import annotations
 
 import pandas as pd
@@ -32,6 +36,23 @@ def check_missing_or_invalid(df, ticker):
             for r in nonpos.itertuples()
         ]
 
+    # Zero-volume observations in stocks require manual review.
+    # Index volume fields are not treated as stock trading volume.
+    if not ticker.startswith("^") and "volume" in df.columns:
+        zero_volume = df[df["volume"] == 0]
+
+        flags += [
+            _flag(
+                ticker,
+                r.date,
+                "zero_volume_observation",
+                "review",
+                "Stock has zero reported volume; verify whether this is "
+                "a non-trading-day or provider-generated observation."
+            )
+            for r in zero_volume.itertuples()
+        ]
+
     return flags
 
 
@@ -39,21 +60,27 @@ def check_duplicate_dates(df, ticker):
     dup = df[df.duplicated("date", keep=False)]
 
     return [
-        _flag(ticker, r.date, "duplicate_date", "review",
-              "date appears more than once")
+        _flag(
+            ticker,
+            r.date,
+            "duplicate_date",
+            "review",
+            "date appears more than once"
+        )
         for r in dup.itertuples()
     ]
 
 
 def check_missing_sessions(df, ticker, benchmark_dates):
-    """Compare observations against Nifty 50 sessions.
+    """Compare observations against Nifty 50 sessions in both directions.
 
-    Stocks receive missing_session flags.
-    Other indices receive index_session_mismatch flags.
-    No observations are removed or filled.
+    Nothing is removed, filled or interpolated.
     """
     if df.empty:
         return []
+
+    own_dates = set(df["date"])
+    benchmark_dates = set(benchmark_dates)
 
     lo, hi = df["date"].min(), df["date"].max()
 
@@ -62,33 +89,48 @@ def check_missing_sessions(df, ticker, benchmark_dates):
         if lo <= d <= hi
     }
 
-    missing = sorted(expected - set(df["date"]))
     is_index = ticker.startswith("^")
+    flags = []
 
-    if is_index:
-        return [
+    # Benchmark has a date, but this instrument does not.
+    for d in sorted(expected - own_dates):
+        if is_index:
+            flags.append(
+                _flag(
+                    ticker,
+                    d,
+                    "index_session_mismatch",
+                    "review",
+                    "Nifty 50 has a row, but this index does not; "
+                    "verify against official index historical data."
+                )
+            )
+        else:
+            flags.append(
+                _flag(
+                    ticker,
+                    d,
+                    "missing_session",
+                    "review",
+                    "Nifty 50 traded, but stock has no row "
+                    "(trading halt or data gap?)"
+                )
+            )
+
+    # Instrument has a date, but the Nifty 50 data does not.
+    for d in sorted(own_dates - benchmark_dates):
+        flags.append(
             _flag(
                 ticker,
                 d,
-                "index_session_mismatch",
+                "extra_session",
                 "review",
-                "Nifty 50 has a row, but this index does not; "
-                "verify against official index historical data."
+                "This instrument has a row on a date absent from "
+                "the Nifty 50 data; verify both data sources."
             )
-            for d in missing
-        ]
-
-    return [
-        _flag(
-            ticker,
-            d,
-            "missing_session",
-            "review",
-            "Nifty 50 traded, but stock has no row "
-            "(trading halt or data gap?)"
         )
-        for d in missing
-    ]
+
+    return flags
 
 
 def _split_near(d, idx, window=3):
