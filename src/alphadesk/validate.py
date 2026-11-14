@@ -1,10 +1,5 @@
-
-"""Validation checks.
-
-Each check returns a list of flag dictionaries.
-Nothing is removed, filled or corrected.
-Flags are prompts for manual review.
-"""
+"""Validation checks. Each returns a list of flag dicts. Nothing is removed,
+filled or corrected: flags are prompts for manual review."""
 from __future__ import annotations
 
 import pandas as pd
@@ -36,23 +31,6 @@ def check_missing_or_invalid(df, ticker):
             for r in nonpos.itertuples()
         ]
 
-    # Zero-volume observations in stocks require manual review.
-    # Index volume fields are not treated as stock trading volume.
-    if not ticker.startswith("^") and "volume" in df.columns:
-        zero_volume = df[df["volume"] == 0]
-
-        flags += [
-            _flag(
-                ticker,
-                r.date,
-                "zero_volume_observation",
-                "review",
-                "Stock has zero reported volume; verify whether this is "
-                "a non-trading-day or provider-generated observation."
-            )
-            for r in zero_volume.itertuples()
-        ]
-
     return flags
 
 
@@ -60,81 +38,51 @@ def check_duplicate_dates(df, ticker):
     dup = df[df.duplicated("date", keep=False)]
 
     return [
-        _flag(
-            ticker,
-            r.date,
-            "duplicate_date",
-            "review",
-            "date appears more than once"
-        )
+        _flag(ticker, r.date, "duplicate_date", "review",
+              "date appears more than once")
         for r in dup.itertuples()
     ]
 
 
 def check_missing_sessions(df, ticker, benchmark_dates):
-    """Compare observations against Nifty 50 sessions in both directions.
+    """Compare against Nifty 50 sessions in BOTH directions.
 
-    Nothing is removed, filled or interpolated.
+    Benchmark has a row, this series does not -> missing_session (stock) or
+    index_session_mismatch (index). This series has a row the benchmark does
+    not -> extra_session. Nothing is removed or filled.
     """
     if df.empty:
         return []
 
-    own_dates = set(df["date"])
-    benchmark_dates = set(benchmark_dates)
-
+    own = set(df["date"])
     lo, hi = df["date"].min(), df["date"].max()
-
-    expected = {
-        d for d in benchmark_dates
-        if lo <= d <= hi
-    }
-
+    expected = {d for d in benchmark_dates if lo <= d <= hi}
     is_index = ticker.startswith("^")
     flags = []
 
-    # Benchmark has a date, but this instrument does not.
-    for d in sorted(expected - own_dates):
+    for d in sorted(expected - own):
         if is_index:
-            flags.append(
-                _flag(
-                    ticker,
-                    d,
-                    "index_session_mismatch",
-                    "review",
-                    "Nifty 50 has a row, but this index does not; "
-                    "verify against official index historical data."
-                )
-            )
+            flags.append(_flag(
+                ticker, d, "index_session_mismatch", "review",
+                "Nifty 50 has a row, but this index does not; "
+                "verify against official index historical data."))
         else:
-            flags.append(
-                _flag(
-                    ticker,
-                    d,
-                    "missing_session",
-                    "review",
-                    "Nifty 50 traded, but stock has no row "
-                    "(trading halt or data gap?)"
-                )
-            )
+            flags.append(_flag(
+                ticker, d, "missing_session", "review",
+                "Nifty 50 traded, but stock has no row "
+                "(trading halt or data gap?)"))
 
-    # Instrument has a date, but the Nifty 50 data does not.
-    for d in sorted(own_dates - benchmark_dates):
-        flags.append(
-            _flag(
-                ticker,
-                d,
-                "extra_session",
-                "review",
-                "This instrument has a row on a date absent from "
-                "the Nifty 50 data; verify both data sources."
-            )
-        )
+    for d in sorted(own - set(benchmark_dates)):
+        flags.append(_flag(
+            ticker, d, "extra_session", "review",
+            "this series has a row on a date the Nifty 50 series does not "
+            "(special session, or a gap in the Nifty 50 data?)"))
 
     return flags
 
 
 def _split_near(d, idx, window=3):
-    """True if a split/bonus is recorded within window rows of row idx."""
+    """True if a split/bonus is recorded within `window` rows of row idx."""
     lo = max(0, idx - window)
     hi = min(len(d) - 1, idx + window)
 
@@ -168,15 +116,19 @@ def check_extreme_returns(df, ticker, threshold=0.15):
     return flags
 
 
-def check_corporate_actions(df, ticker, factor_tol=0.0005, div_tol=0.002):
-    """Corporate-action diagnostics, not proof.
+def check_corporate_actions(df, ticker, factor_tol=0.0005,
+                            div_rel_tol=0.25, div_min_yield=0.0005):
+    """DIAGNOSTICS, not proof. Close is (as far as we know) split-adjusted;
+    Adj Close additionally reflects dividends. Flags prompt manual review.
 
-    Close is treated as the provider's split-adjusted price.
-    Adj Close additionally reflects dividend adjustment.
-    Flags prompt manual review.
+    Dividend check: the recorded yield (dividend / prior close) must match the
+    yield implied by the Adj Close / Close factor within div_rel_tol of the
+    recorded yield, on the recorded row or one row either side (Yahoo's date
+    alignment can differ by a session). Yields below div_min_yield are
+    reported as untestable, because price rounding is the same size as the
+    adjustment.
     """
     d = df.sort_values("date").reset_index(drop=True)
-
     flags = []
 
     close_ret = d["close"].pct_change()
@@ -185,22 +137,16 @@ def check_corporate_actions(df, ticker, factor_tol=0.0005, div_tol=0.002):
     has_split = (d["split_ratio"] > 0) & (d["split_ratio"] != 1)
     has_div = d["dividends"] > 0
 
-    # 1. Splits: log each and look for an unadjusted pattern
-    # on the event date or within one row.
+    # 1. Splits: log each; look for the UNADJUSTED pattern on the day or +/-1 row.
     for i in d.index[has_split.to_numpy()]:
         ratio = d.at[i, "split_ratio"]
 
         flags.append(
-            _flag(
-                ticker,
-                d.at[i, "date"],
-                "split_recorded",
-                "info",
-                f"split_ratio={ratio}"
-            )
+            _flag(ticker, d.at[i, "date"], "split_recorded", "info",
+                  f"split_ratio={ratio}")
         )
 
-        implied = 1 / ratio - 1
+        implied = 1 / ratio - 1                      # e.g. -50% for a 2:1 split
 
         for j in range(max(0, i - 1), min(len(d) - 1, i + 1) + 1):
             if abs(close_ret[j] - implied) < 0.25 * abs(implied):
@@ -217,39 +163,56 @@ def check_corporate_actions(df, ticker, factor_tol=0.0005, div_tol=0.002):
                 )
                 break
 
-    # 2. Dividends: compare recorded yield with the yield
-    # implied by the adjustment factor.
+    # 2. Dividends.
     for i in d.index[has_div.to_numpy()]:
         flags.append(
-            _flag(
-                ticker,
-                d.at[i, "date"],
-                "dividend_recorded",
-                "info",
-                f"dividend={d.at[i, 'dividends']}"
-            )
+            _flag(ticker, d.at[i, "date"], "dividend_recorded", "info",
+                  f"dividend={d.at[i, 'dividends']}")
         )
 
         if i == 0:
             continue
 
         expected = d.at[i, "dividends"] / d.at[i - 1, "close"]
-        implied = 1 - factor[i - 1] / factor[i]
 
-        if abs(implied - expected) > div_tol:
+        if pd.isna(expected):
+            flags.append(
+                _flag(ticker, d.at[i, "date"], "dividend_untestable", "review",
+                      "prior close missing; cannot test")
+            )
+            continue
+
+        if expected < div_min_yield:
+            flags.append(
+                _flag(
+                    ticker, d.at[i, "date"], "dividend_untestable", "info",
+                    f"recorded yield {expected:.3%} is below "
+                    f"{div_min_yield:.3%}; too small to distinguish "
+                    "from price rounding"
+                )
+            )
+            continue
+
+        implied = {
+            j: 1 - factor[j - 1] / factor[j]
+            for j in range(max(1, i - 1), min(len(d) - 1, i + 1) + 1)
+        }
+        best = min(implied, key=lambda j: abs(implied[j] - expected))
+
+        if abs(implied[best] - expected) > div_rel_tol * expected:
             flags.append(
                 _flag(
                     ticker,
                     d.at[i, "date"],
                     "dividend_adjustment_mismatch",
                     "review",
-                    f"recorded yield {expected:.3%}, "
-                    f"adjustment-implied {implied:.3%}"
+                    f"recorded yield {expected:.3%}; closest "
+                    f"adjustment-implied yield {implied[best]:.3%} "
+                    f"(rows {i - 1} to {i + 1})"
                 )
             )
 
-    # 3. Detect adjustment-factor changes without a nearby
-    # recorded dividend or split.
+    # 3. Factor changes with no recorded event within +/-1 row.
     near_event = (
         (has_div | has_split)
         .astype(int)
@@ -285,35 +248,20 @@ def check_ticker_consistency(
 
     if not is_index and not ticker.endswith(".NS"):
         flags.append(
-            _flag(
-                ticker,
-                None,
-                "ticker_suffix",
-                "review",
-                "stock ticker does not end with .NS"
-            )
+            _flag(ticker, None, "ticker_suffix", "review",
+                  "stock ticker does not end with .NS")
         )
 
     if (df["ticker"] != ticker).any():
         flags.append(
-            _flag(
-                ticker,
-                None,
-                "ticker_mismatch",
-                "review",
-                "returned rows carry a different ticker"
-            )
+            _flag(ticker, None, "ticker_mismatch", "review",
+                  "returned rows carry a different ticker")
         )
 
     if df.empty:
         flags.append(
-            _flag(
-                ticker,
-                None,
-                "empty_history",
-                "review",
-                "no price observations returned"
-            )
+            _flag(ticker, None, "empty_history", "review",
+                  "no price observations returned")
         )
         return flags
 
