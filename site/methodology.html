@@ -1,0 +1,61 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Methodology | Alpha Desk India</title><style>
+:root{--bg:#fff;--fg:#1a1a1a;--mut:#555;--line:#d9d9d9;--acc:#1f5fa8;--warn:#fff3cd}
+@media(prefers-color-scheme:dark){:root{--bg:#14171a;--fg:#e8e8e8;--mut:#a0a0a0;--line:#333;--acc:#7db4f0;--warn:#4a3d10}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,Segoe UI,Arial,sans-serif}
+header,main,footer{max-width:980px;margin:0 auto;padding:12px 16px}
+nav{display:flex;flex-wrap:wrap;gap:4px 14px;border-bottom:1px solid var(--line);padding-bottom:8px}
+nav a{color:var(--acc);text-decoration:none}nav a[aria-current=page]{font-weight:700;border-bottom:2px solid var(--acc)}
+h1{font-size:1.6rem;margin:.6em 0 .3em}h2{font-size:1.25rem;margin:1.4em 0 .3em}h3{font-size:1.05rem}
+.banner{background:var(--warn);border-left:4px solid #e0a800;padding:8px 12px;margin:10px 0}
+.scroll{overflow-x:auto}table{border-collapse:collapse;font-size:.88rem;min-width:100%}
+th,td{border:1px solid var(--line);padding:4px 8px;text-align:right;white-space:nowrap}th:first-child,td:first-child{text-align:left}
+.muted{color:var(--mut)}.chart{width:100%;max-width:560px}.bar{fill:var(--acc)}.axis{stroke:var(--mut)}.lbl{font:10px sans-serif;fill:var(--fg)}
+details{border:1px solid var(--line);padding:6px 10px;margin:8px 0}footer{color:var(--mut);font-size:.85rem;border-top:1px solid var(--line);margin-top:24px}
+</style></head><body><header><strong>Alpha Desk India</strong><nav><a href="index.html">Home</a><a href="research.html">Research</a><a href="methodology.html" aria-current=page>Methodology</a><a href="market-monitor.html">Market Monitor</a><a href="daily-notes.html">Daily Notes</a><a href="scorecard.html">Scorecard</a><a href="data-sources.html">Data &amp; Sources</a><a href="about.html">About</a></nav></header><main><h1>Methodology</h1>
+<h3>Event identification and timestamps</h3>
+<p>Each quarterly-results announcement is assigned to day 0, the first session in which the market can react.
+Announcements before 09:15 IST count on the same session; announcements after 15:30 IST count on the next session;
+weekend and holiday announcements roll to the next session. Announcements released between 09:15 and 15:30, and
+announcements with no recorded time on a trading day, are excluded from the primary study because daily closing
+prices cannot isolate an intraday reaction. Sessions are taken from observed exchange data, never inferred from
+calendar days. Duplicate company-quarter rows keep the earliest timestamp and the rest are logged.</p>
+<h3>Market model</h3>
+<p>Expected returns follow R<sub>i,t</sub> = &alpha;<sub>i</sub> + &beta;<sub>i</sub> R<sub>m,t</sub> + &epsilon;<sub>i,t</sub>,
+estimated by ordinary least squares on sessions [-130, -11] relative to day 0 (120 sessions, at least 100 usable). The
+estimation window ends ten sessions before the event so the event's own reaction cannot leak into &alpha; and &beta;.
+Reaction days [-1, +5] of the same company's other announcements are removed from its estimation window. Abnormal
+return is AR<sub>i,t</sub> = R<sub>i,t</sub> &minus; (&alpha;&#770;<sub>i</sub> + &beta;&#770;<sub>i</sub> R<sub>m,t</sub>);
+cumulative abnormal return is CAR<sub>i</sub>[a,b] = &Sigma;<sub>t=a..b</sub> AR<sub>i,t</sub>. A single AR is one day's
+surprise relative to the model; a CAR accumulates those daily surprises over the window. Returns are simple daily
+returns of dividend-adjusted closes (stocks) and of the price-index close (benchmark). Missing prices give missing
+returns; nothing is filled or set to zero.</p>
+<h3>Event windows and tests</h3>
+<p>CARs are computed over [0,+1], [0,+3], [0,+5] and, as a robustness window, [-1,+1]. The windows are nested and
+overlapping, so their results are not independent. Across events we report a one-sample t-test (sensitive to outliers
+and non-normality), a Wilcoxon signed-rank test (assumes a symmetric distribution), an exact sign test (ignores
+magnitude) and 95% confidence intervals. Companies reporting on the same day share market and sector shocks, so the
+primary p-value is date-clustered (cluster = day 0, G&minus;1 degrees of freedom); it is unreliable when the number of
+date clusters is small. A common-shift placebo moves every event date by the same offset (&plusmn;11 to &plusmn;50
+sessions, 80 shifts), re-runs the pipeline, and compares the real mean CAR with the 80 placebo means (two-sided empirical
+p); it preserves same-day clustering but not within-company time-series dependence. Results need at least 30 events
+overall and 15 per sector to be labelled inferential; otherwise they are descriptive. Sector p-values are Holm-adjusted
+across inferential sectors only. Statistical significance is not economic significance and does not imply a profitable
+trading strategy.</p>
+<h2>Limitations</h2>
+<ul>
+<li><b>Survivorship bias.</b> The universe is the current Nifty 100 constituent list applied to history; it does not
+represent past index membership.</li>
+<li><b>Data source.</b> Prices come from yfinance, an unofficial wrapper; adjustments for splits, bonuses and dividends
+were diagnosed but not independently reconciled with exchange data, and demergers and similar actions may not be modelled.</li>
+<li><b>Benchmark gaps.</b> Where the benchmark series lacks a session, that day is dropped from estimation and any event
+window touching it is voided rather than filled.</li>
+<li><b>Announcement timing.</b> Day 0 depends on the recorded announcement time; closing-auction effects for releases near
+15:30 are not modelled.</li>
+<li><b>Confounding.</b> Market-wide, sector-wide and company-specific news in the same window is not separated from results.</li>
+<li><b>Daily data.</b> Closing prices cannot isolate intraday reactions.</li>
+<li><b>Multiple testing.</b> Four overlapping windows and several sectors are examined; unadjusted p-values overstate evidence.</li>
+<li><b>Earnings measure.</b> No analyst consensus is used; this study measures reaction to the announcement, not to an earnings surprise.</li>
+</ul>
+<p>Future work: historical index membership, an official-data reconciliation of prices, consensus-based surprises,
+intraday data, alternative benchmarks and estimation windows.</p>
+</main><footer>Independent research project; not institutional research and not investment advice. Page generated 2026-11-14T09:50:49+00:00 (UTC). Pipeline schedules may be delayed.</footer></body></html>

@@ -1,0 +1,94 @@
+name: pipeline
+# Scheduled runs can be delayed by GitHub; no exact publication time is promised.
+on:
+  schedule:
+    - cron: "30 3 * * 1-5"     # 03:30 UTC (09:00 IST), weekdays
+  workflow_dispatch:
+
+concurrency:
+  group: pipeline
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e . pytest
+      - run: python -m pytest -q
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e .
+
+      - name: Fetch prices
+        id: fetch
+        continue-on-error: true
+        run: python scripts/fetch_prices.py --universe config/universe.csv --start 2022-01-01
+
+      - name: Run event study (only if announcements exist and the refresh worked)
+        if: steps.fetch.outcome == 'success' && hashFiles('data/reference/earnings_announcements.csv') != ''
+        continue-on-error: true
+        run: python scripts/run_event_study.py --events data/reference/earnings_announcements.csv --prices-dir data/raw/prices --benchmark ^CNX100
+
+      - name: Record status (success)
+        if: steps.fetch.outcome == 'success'
+        run: python scripts/update_status.py --outcome success
+      - name: Record status (failure)
+        if: steps.fetch.outcome != 'success'
+        run: python scripts/update_status.py --outcome failure
+
+      - name: Build site
+        run: python scripts/build_site.py --refresh-ok ${{ steps.fetch.outcome == 'success' && 'true' || 'false' }}
+
+      - name: Commit status file
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site_data/status.json
+          git diff --cached --quiet || (git commit -m "Update pipeline status" && git push)
+
+      - name: Upload raw data and logs (workflow artifact, not committed)
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pipeline-data
+          path: |
+            data/raw/prices/
+            logs/fetch_prices/
+            outputs/event_study/
+          if-no-files-found: ignore
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Fail the run if the data refresh failed (the site shows a failure banner)
+        if: steps.fetch.outcome != 'success'
+        run: exit 1
+
+  deploy:
+    needs: build
+    if: ${{ !cancelled() && needs.build.result != 'skipped' }}
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
