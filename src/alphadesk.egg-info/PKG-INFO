@@ -6,3 +6,4 @@ Requires-Dist: pandas
 Requires-Dist: numpy
 Requires-Dist: yfinance
 Requires-Dist: tzdata
+Requires-Dist: scipy

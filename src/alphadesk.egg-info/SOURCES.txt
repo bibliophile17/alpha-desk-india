@@ -9,3 +9,4 @@ src/alphadesk.egg-info/SOURCES.txt
 src/alphadesk.egg-info/dependency_links.txt
 src/alphadesk.egg-info/requires.txt
 src/alphadesk.egg-info/top_level.txt
+tests/test_validate.py
