@@ -1,8 +1,11 @@
 .venv/
 __pycache__/
-*.py[cod]
+*.egg-info/
 .pytest_cache/
-logs/
 data/raw/
 data/processed/
-.env
+logs/price_probe/
+logs/fetch_prices/
+logs/earnings_probe/
+project_structure.txt
+project_files.txt
