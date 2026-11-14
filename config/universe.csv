@@ -1,0 +1,101 @@
+ticker,company,sector,isin,source_file,retrieved_at,note
+ABB.NS,ABB India Ltd.,Capital Goods,INE117A01022,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+ADANIENSOL.NS,Adani Energy Solutions Ltd.,Power,INE931S01010,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+ADANIENT.NS,Adani Enterprises Ltd.,Metals & Mining,INE423A01024,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+ADANIGREEN.NS,Adani Green Energy Ltd.,Power,INE364U01010,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+ADANIPORTS.NS,Adani Ports and Special Economic Zone Ltd.,Services,INE742F01042,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+ADANIPOWER.NS,Adani Power Ltd.,Power,INE814H01029,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+AMBUJACEM.NS,Ambuja Cements Ltd.,Construction Materials,INE079A01024,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+APOLLOHOSP.NS,Apollo Hospitals Enterprise Ltd.,Healthcare,INE437A01024,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+ASIANPAINT.NS,Asian Paints Ltd.,Consumer Durables,INE021A01026,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+DMART.NS,Avenue Supermarts Ltd.,Consumer Services,INE192R01011,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+AXISBANK.NS,Axis Bank Ltd.,Financial Services,INE238A01034,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+BSE.NS,BSE Ltd.,Financial Services,INE118H01025,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+BAJAJ-AUTO.NS,Bajaj Auto Ltd.,Automobile and Auto Components,INE917I01010,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+BAJFINANCE.NS,Bajaj Finance Ltd.,Financial Services,INE296A01032,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+BAJAJFINSV.NS,Bajaj Finserv Ltd.,Financial Services,INE918I01026,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+BAJAJHLDNG.NS,Bajaj Holdings & Investment Ltd.,Financial Services,INE118A01012,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+BANKBARODA.NS,Bank of Baroda,Financial Services,INE028A01039,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+BEL.NS,Bharat Electronics Ltd.,Capital Goods,INE263A01024,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+BPCL.NS,Bharat Petroleum Corporation Ltd.,Oil Gas & Consumable Fuels,INE029A01011,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+BHARTIARTL.NS,Bharti Airtel Ltd.,Telecommunication,INE397D01024,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+BOSCHLTD.NS,Bosch Ltd.,Automobile and Auto Components,INE323A01026,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+BRITANNIA.NS,Britannia Industries Ltd.,Fast Moving Consumer Goods,INE216A01030,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+CGPOWER.NS,CG Power and Industrial Solutions Ltd.,Capital Goods,INE067A01029,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+CANBK.NS,Canara Bank,Financial Services,INE476A01022,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+CHOLAFIN.NS,Cholamandalam Investment and Finance Company Ltd.,Financial Services,INE121A01024,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+CIPLA.NS,Cipla Ltd.,Healthcare,INE059A01026,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+COALINDIA.NS,Coal India Ltd.,Oil Gas & Consumable Fuels,INE522F01014,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+CUMMINSIND.NS,Cummins India Ltd.,Capital Goods,INE298A01020,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+DLF.NS,DLF Ltd.,Realty,INE271C01023,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+DIVISLAB.NS,Divi's Laboratories Ltd.,Healthcare,INE361B01024,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+DRREDDY.NS,Dr. Reddy's Laboratories Ltd.,Healthcare,INE089A01031,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+EICHERMOT.NS,Eicher Motors Ltd.,Automobile and Auto Components,INE066A01021,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+ETERNAL.NS,Eternal Ltd.,Consumer Services,INE758T01015,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+GAIL.NS,GAIL (India) Ltd.,Oil Gas & Consumable Fuels,INE129A01019,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+GODREJCP.NS,Godrej Consumer Products Ltd.,Fast Moving Consumer Goods,INE102D01028,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+GRASIM.NS,Grasim Industries Ltd.,Construction Materials,INE047A01021,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+HCLTECH.NS,HCL Technologies Ltd.,Information Technology,INE860A01027,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+HDFCAMC.NS,HDFC Asset Management Company Ltd.,Financial Services,INE127D01025,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+HDFCBANK.NS,HDFC Bank Ltd.,Financial Services,INE040A01034,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+HDFCLIFE.NS,HDFC Life Insurance Company Ltd.,Financial Services,INE795G01014,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+HINDALCO.NS,Hindalco Industries Ltd.,Metals & Mining,INE038A01020,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+HAL.NS,Hindustan Aeronautics Ltd.,Capital Goods,INE066F01020,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+HINDUNILVR.NS,Hindustan Unilever Ltd.,Fast Moving Consumer Goods,INE030A01027,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+HINDZINC.NS,Hindustan Zinc Ltd.,Metals & Mining,INE267A01025,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+POWERINDIA.NS,Hitachi Energy India Ltd.,Capital Goods,INE07Y701011,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+HYUNDAI.NS,Hyundai Motor India Ltd.,Automobile and Auto Components,INE0V6F01027,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+ICICIBANK.NS,ICICI Bank Ltd.,Financial Services,INE090A01021,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+ITC.NS,ITC Ltd.,Fast Moving Consumer Goods,INE154A01025,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+IOC.NS,Indian Oil Corporation Ltd.,Oil Gas & Consumable Fuels,INE242A01010,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+IRFC.NS,Indian Railway Finance Corporation Ltd.,Financial Services,INE053F01010,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+INFY.NS,Infosys Ltd.,Information Technology,INE009A01021,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+INDIGO.NS,InterGlobe Aviation Ltd.,Services,INE646L01027,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+JSWSTEEL.NS,JSW Steel Ltd.,Metals & Mining,INE019A01038,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+JINDALSTEL.NS,Jindal Steel Ltd.,Metals & Mining,INE749A01030,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+JIOFIN.NS,Jio Financial Services Ltd.,Financial Services,INE758E01017,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+KOTAKBANK.NS,Kotak Mahindra Bank Ltd.,Financial Services,INE237A01036,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+LTM.NS,LTM Ltd.,Information Technology,INE214T01019,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+LT.NS,Larsen & Toubro Ltd.,Construction,INE018A01030,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+M&M.NS,Mahindra & Mahindra Ltd.,Automobile and Auto Components,INE101A01026,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+MARUTI.NS,Maruti Suzuki India Ltd.,Automobile and Auto Components,INE585B01010,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+MAXHEALTH.NS,Max Healthcare Institute Ltd.,Healthcare,INE027H01010,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+MAZDOCK.NS,Mazagoan Dock Shipbuilders Ltd.,Capital Goods,INE249Z01020,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+MUTHOOTFIN.NS,Muthoot Finance Ltd.,Financial Services,INE414G01012,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+NTPC.NS,NTPC Ltd.,Power,INE733E01010,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+NESTLEIND.NS,Nestle India Ltd.,Fast Moving Consumer Goods,INE239A01024,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+ONGC.NS,Oil & Natural Gas Corporation Ltd.,Oil Gas & Consumable Fuels,INE213A01029,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+PIDILITIND.NS,Pidilite Industries Ltd.,Chemicals,INE318A01026,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+POLYCAB.NS,Polycab India Ltd.,Capital Goods,INE455K01017,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+PFC.NS,Power Finance Corporation Ltd.,Financial Services,INE134E01011,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+POWERGRID.NS,Power Grid Corporation of India Ltd.,Power,INE752E01010,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+PNB.NS,Punjab National Bank,Financial Services,INE160A01022,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+RELIANCE.NS,Reliance Industries Ltd.,Oil Gas & Consumable Fuels,INE002A01018,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+SBILIFE.NS,SBI Life Insurance Company Ltd.,Financial Services,INE123W01016,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+MOTHERSON.NS,Samvardhana Motherson International Ltd.,Automobile and Auto Components,INE775A01035,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+SHRIRAMFIN.NS,Shriram Finance Ltd.,Financial Services,INE721A01047,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+ENRIN.NS,Siemens Energy India Ltd.,Capital Goods,INE1NPP01017,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+SIEMENS.NS,Siemens Ltd.,Capital Goods,INE003A01024,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+SOLARINDS.NS,Solar Industries India Ltd.,Chemicals,INE343H01029,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+SBIN.NS,State Bank of India,Financial Services,INE062A01020,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+SUNPHARMA.NS,Sun Pharmaceutical Industries Ltd.,Healthcare,INE044A01036,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+TVSMOTOR.NS,TVS Motor Company Ltd.,Automobile and Auto Components,INE494B01023,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+TATACAP.NS,Tata Capital Ltd.,Financial Services,INE976I01016,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+TCS.NS,Tata Consultancy Services Ltd.,Information Technology,INE467B01029,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+TATACONSUM.NS,Tata Consumer Products Ltd.,Fast Moving Consumer Goods,INE192A01025,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+TMCV.NS,Tata Motors Ltd.,Capital Goods,INE1TAE01010,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+TMPV.NS,Tata Motors Passenger Vehicles Ltd.,Automobile and Auto Components,INE155A01022,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+TATAPOWER.NS,Tata Power Co. Ltd.,Power,INE245A01021,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+TATASTEEL.NS,Tata Steel Ltd.,Metals & Mining,INE081A01020,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+TECHM.NS,Tech Mahindra Ltd.,Information Technology,INE669C01036,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+TITAN.NS,Titan Company Ltd.,Consumer Durables,INE280A01028,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+TORNTPHARM.NS,Torrent Pharmaceuticals Ltd.,Healthcare,INE685A01028,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+TRENT.NS,Trent Ltd.,Consumer Services,INE849A01020,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+ULTRACEMCO.NS,UltraTech Cement Ltd.,Construction Materials,INE481G01011,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+UNIONBANK.NS,Union Bank of India,Financial Services,INE692A01016,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+VBL.NS,Varun Beverages Ltd.,Fast Moving Consumer Goods,INE200M01039,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+VAML.NS,Vedanta Aluminium Metal Ltd.,Metals & Mining,INE1CDF01017,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+VEDL.NS,Vedanta Ltd.,Metals & Mining,INE205A01025,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+IDEA.NS,Vodafone Idea Ltd.,Telecommunication,INE669E01016,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+WIPRO.NS,Wipro Ltd.,Information Technology,INE075A01022,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use
+ZYDUSLIFE.NS,Zydus Lifesciences Ltd.,Healthcare,INE010B01027,ind_nifty100list.csv,2026-11-14T15:07:21.620941+00:00,current constituents; survivorship bias for historical use

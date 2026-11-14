@@ -25,3 +25,10 @@ Status: OPEN unless stated. Nothing here is silently fixed or filled.
 
 ## Tooling
 - GitHub Actions warning: `checkout@v4`, `setup-python@v5`, `upload-artifact@v4` target Node 20; bump after checking each action's releases.
+
+## Price data review, 2026-11-14 (not fixed)
+- Calendar audit: 70 weekday gaps and 1 weekend session in ^NSEI; none verified against NSE circulars. Only gaps that coincide with an announcement date matter (see validate_announcements warnings).
+- ^CNX100 lacks 6 sessions the Nifty 50 has (2022-12-26, 2024-01-01, 2024-02-19, 2025-01-01, 2025-02-01, 2026-01-01); handled by gap exclusion, not verified.
+- Stocks have an extra row on 2026-01-15 that ^NSEI lacks; ignored by the study.
+- Short histories: HYUNDAI, JIOFIN, ENRIN, TATACAP, TMCV, VAML. VAML cannot be used. TMPV and LTM histories may reflect predecessor businesses; unchecked.
+- 80 extreme_return flags logged, unreviewed.

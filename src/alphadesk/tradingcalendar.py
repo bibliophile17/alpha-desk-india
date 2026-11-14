@@ -1,4 +1,4 @@
-"""Trading calendar built from OBSERVED exchange sessions, never assumed.
+﻿"""Trading calendar built from OBSERVED exchange sessions, never assumed.
 
 Calendar days and trading days are not interchangeable: the event study counts
 in sessions (-130, -11, +5 ...), so every offset goes through this class.
@@ -80,8 +80,8 @@ def audit_calendar(cal: TradingCalendar, holidays_csv=None) -> pd.DataFrame:
     """Rows needing manual review. holidays_csv: date, description, source_url."""
     hol = set()
     if holidays_csv and Path(holidays_csv).exists():
-        h = pd.read_csv(holidays_csv, parse_dates=["date"])
-        hol = set(h["date"].dt.normalize())
+        h = pd.read_csv(holidays_csv)
+        hol = set(pd.to_datetime(h['date']).dt.normalize())
     rows = []
     for d in pd.bdate_range(cal.first, cal.last):
         if not cal.is_session(d):
@@ -95,3 +95,4 @@ def audit_calendar(cal: TradingCalendar, holidays_csv=None) -> pd.DataFrame:
             rows.append({"date": d.date(), "weekday": d.day_name(),
                          "item": "holiday_listed_but_traded"})
     return pd.DataFrame(rows, columns=["date", "weekday", "item"])
+
