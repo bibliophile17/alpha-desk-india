@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "alphadesk"
 version = "0.1.0"
 requires-python = ">=3.10"
-dependencies = ["pandas", "numpy", "yfinance", "tzdata", "scipy"]
+dependencies = ["pandas", "numpy", "yfinance", "tzdata", "scipy", "duckdb", "pyarrow"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

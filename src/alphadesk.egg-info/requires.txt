@@ -3,3 +3,5 @@ numpy
 yfinance
 tzdata
 scipy
+duckdb
+pyarrow
