@@ -1,4 +1,4 @@
-r"""Check an announcements CSV before running the study. Read-only: flags, never edits.
+﻿r"""Check an announcements CSV before running the study. Read-only: flags, never edits.
 
   python scripts\validate_announcements.py --events data\reference\earnings_announcements.csv
 Exit code 1 if any row has a blocking problem (bad date, no source_url, unknown ticker, no price file).
@@ -19,7 +19,10 @@ ap.add_argument("--prices-dir", default="data/raw/prices")
 ap.add_argument("--universe", default="config/universe.csv")
 a = ap.parse_args()
 
-raw = load_announcements(a.events)
+try:
+    raw = load_announcements(a.events)
+except ValueError as exc:
+    sys.exit(f'NOT READY: {exc}. Add rows with scripts/add_event.py.')
 blocking, warn = [], []
 d = pd.to_datetime(raw["announce_date"], errors="coerce")
 for i in raw.index[d.isna()]:
@@ -58,3 +61,4 @@ for tag, items in (("BLOCKING", blocking), ("warning", warn)):
         print(f"{tag}: csv line {line}: {msg}")
 print("RESULT:", "FIX BLOCKING ROWS" if blocking else "OK to run the study")
 sys.exit(1 if blocking else 0)
+

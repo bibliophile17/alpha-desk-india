@@ -1,1 +1,2 @@
 ticker,company,sector,fiscal_quarter,announce_date,announce_time,time_source,revenue,pat,eps,prior_revenue,prior_pat,prior_eps,source_url,retrieved_at
+TCS.NS,Tata Consultancy Services Ltd.,Information Technology,Q2FY26,2025-10-09,15:42,bse_filing,,,,,,,https://www.bseindia.com/...,2026-11-14T15:17:56+00:00

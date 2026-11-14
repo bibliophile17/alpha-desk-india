@@ -44,3 +44,9 @@ never treated as an empty dataset.
 - Delisted and merged companies are generally unavailable, which contributes
   to survivorship bias.
 - Index symbols (e.g. `^CNX100`) and Indian tickers can change or disappear.
+
+## Project status
+
+- Built and tested: price pipeline with validation, trading calendar, timestamp alignment, market-model event study, inference and placebo tests, scorecard, daily-note generator, paper and site generators, scheduled pipeline.
+- Not yet done: no verified earnings-announcement dataset exists, so **no research results have been produced**. The paper and site show 'no results yet' until real announcements are added with scripts/add_event.py and validated.
+- Known limitations: see docs/known_issues.md (survivorship bias, unofficial Yahoo prices, unverified calendar gaps).
