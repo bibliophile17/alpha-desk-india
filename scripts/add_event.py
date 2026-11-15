@@ -1,10 +1,10 @@
-r"""Append ONE verified announcement to data/reference/earnings_announcements.csv, with checks.
+﻿r"""Append ONE verified announcement to data/reference/earnings_announcements.csv, with checks.
 
   python scripts\add_event.py --ticker TCS.NS --quarter Q2FY26 --date 2025-10-09 --time 15:42 ^
       --time-source bse_filing --url https://www.bseindia.com/... [--sector "Information Technology"]
   python scripts\add_event.py ... --no-time     (date known, time unknown: row is kept but will be excluded)
 
-Only enter what a filing or the company's own page states. Times are IST, 24-hour HH:MM.
+Only enter what a filing or the company's own page states. Times are IST, 24-hour HH:MM or HH:MM:SS.
 Refuses: unknown ticker, bad date/time, future date, missing URL, duplicate (ticker, quarter).
 """
 import argparse
@@ -43,8 +43,8 @@ if d > pd.Timestamp.now().normalize():
     sys.exit("BAD --date: in the future")
 if a.no_time == (a.time is not None):
     sys.exit("give exactly one of --time HH:MM or --no-time")
-if a.time and not re.fullmatch(r"([01]\d|2[0-3]):[0-5]\d", a.time):
-    sys.exit("BAD --time: use 24-hour HH:MM in IST")
+if a.time and not re.fullmatch(r"([01]\d|2[0-3]):[0-5]\d(:[0-5]\d)?", a.time):
+    sys.exit("BAD --time: use 24-hour HH:MM or HH:MM:SS in IST")
 if a.time and not a.time_source:
     sys.exit("--time needs --time-source (where did the time come from?)")
 uni = pd.read_csv(a.universe).set_index("ticker")
@@ -62,3 +62,4 @@ row = {"ticker": a.ticker, "company": uni.at[a.ticker, "company"], "sector": uni
        "source_url": a.url, "retrieved_at": datetime.now(timezone.utc).isoformat(timespec="seconds")}
 pd.concat([df, pd.DataFrame([row])], ignore_index=True)[COLS].to_csv(p, index=False)
 print(f"added {a.ticker} {a.quarter} {d.date()} {a.time or '(no time)'}; file now has {len(df) + 1} rows")
+
