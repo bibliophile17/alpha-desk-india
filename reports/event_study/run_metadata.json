@@ -1,0 +1,52 @@
+{
+  "run_at_utc": "2026-11-15T02:56:55.995965+00:00",
+  "python": "3.11.3",
+  "pandas": "3.1.1",
+  "numpy": "2.4.6",
+  "scipy": "1.17.1",
+  "benchmark": "^CNX100",
+  "calendar": "^NSEI",
+  "price_col": "adj_close",
+  "estimation_window": [
+    -130,
+    -11
+  ],
+  "windows": {
+    "[0,+1]": [
+      0,
+      1
+    ],
+    "[0,+3]": [
+      0,
+      3
+    ],
+    "[0,+5]": [
+      0,
+      5
+    ],
+    "[-1,+1]": [
+      -1,
+      1
+    ]
+  },
+  "min_est_obs": 100,
+  "min_n_overall": 30,
+  "min_n_sector": 15,
+  "calendar_range": [
+    "2022-01-03",
+    "2026-11-13"
+  ],
+  "events_loaded": 13,
+  "events_after_dedup": 13,
+  "events_eligible": 13,
+  "timing_class_counts": {
+    "after_market": 12,
+    "non_session_day": 1
+  },
+  "result_status_counts": {
+    "ok": 13
+  },
+  "events_file_sha256": "0537e6c173ef8fe537ccbbe06bb23267c9397fb957c3d6a6aa146dc0cc93b2f6",
+  "price_files_sha256": "e43d73b76c57bdaa0f925cb890baa5e023fed8df99d7c82610ac1bc01fd6ae55",
+  "note": "CLUSTER p-values (cluster = day 0) are primary; results with n below threshold are exploratory."
+}
